@@ -1,4 +1,3 @@
-// app/[uuid]/Profile.tsx
 'use client'
 
 import { useEffect, useState } from 'react'
