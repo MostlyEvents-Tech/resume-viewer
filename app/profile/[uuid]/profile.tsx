@@ -13,7 +13,8 @@ import {
   Award,
   Trophy,
   Star,
-  Medal
+  Medal,
+  UserIcon
 } from 'lucide-react'
 
 interface Props {
@@ -131,14 +132,20 @@ export default function Profile({ uuid }: Props) {
           <div className="h-32 bg-gradient-to-r from-primary to-primary/60" />
           <div className="p-6 flex flex-col md:flex-row items-start md:items-center gap-6">
             <Avatar className="w-24 h-24 border-4 border-background -mt-12">
-              <img
-                src={user.profile_picture}
-                alt={`${user.first_name} ${user.last_name}`}
-              />
+              {user?.profile_picture ? (
+                <img
+                  src={user.profile_picture}
+                  alt={`${user.first_name} ${user.last_name}`}
+                />
+              ) : (
+                <div className="flex items-center justify-center w-full h-full bg-muted text-muted-foreground">
+                  <UserIcon className="w-12 h-12" />
+                </div>
+              )}
             </Avatar>
             <div className="flex-grow space-y-2">
               <h1 className="text-2xl font-bold">
-                {user.first_name} {user.last_name}
+                {user?.first_name} {user?.last_name}
               </h1>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Briefcase className="w-4 h-4" />
@@ -174,24 +181,24 @@ export default function Profile({ uuid }: Props) {
           <CardContent>
             <p className="text-muted-foreground mb-6">{user.bio}</p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="flex items-center gap-2">
+              {user.email && <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-muted-foreground" />
                 <span>{user.email}</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </div>}
+              {user.phone_number && <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-muted-foreground" />
                 <span>{user.phone_number}</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </div>}
+              {user.date_of_birth && <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4 text-muted-foreground" />
                 <span>{user.date_of_birth}</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </div>}
+              {user.work_experience && <div className="flex items-center gap-2">
                 <Award className="w-4 h-4 text-muted-foreground" />
                 <span>{user.work_experience}</span>
-              </div>
+              </div>}
             </div>
-
+            {user.languages.length>0 &&<>
             <h3 className="font-semibold mt-6 mb-2">Languages</h3>
             <div className="flex flex-wrap gap-2">
               {user.languages.map((lang) => (
@@ -200,7 +207,9 @@ export default function Profile({ uuid }: Props) {
                 </Badge>
               ))}
             </div>
+            </>}
 
+            {user.job_preference && <>
             <h3 className="font-semibold mt-6 mb-2">Job Preferences</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
@@ -228,10 +237,13 @@ export default function Profile({ uuid }: Props) {
               <MapPin className="w-4 h-4 inline mr-1" />
               Preferred Location: {user.job_preference.prefered_city}
             </p>
+            </>}
           </CardContent>
         </Card>
 
         {/* === Experience === */}
+        
+        {user.experiences.length > 0 &&
         <Card>
           <CardHeader>
             <CardTitle>Work Experience</CardTitle>
@@ -255,10 +267,11 @@ export default function Profile({ uuid }: Props) {
               </div>
             ))}
           </CardContent>
-        </Card>
+        </Card>}
 
         {/* === Education === */}
-        <Card>
+        {user.educations.length > 0 &&
+          <Card>
           <CardHeader>
             <CardTitle>Education</CardTitle>
           </CardHeader>
@@ -283,7 +296,7 @@ export default function Profile({ uuid }: Props) {
               </div>
             ))}
           </CardContent>
-        </Card>
+        </Card>}
       </div>
     </div>
   )

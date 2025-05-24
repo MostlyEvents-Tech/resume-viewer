@@ -25,7 +25,7 @@ interface Company {
 }
 
 interface JobPosting {
-  id: number;
+  id: string;
   title: string;
   company: Company;
   tags: string[];
@@ -117,9 +117,14 @@ export default function Profile({ uuid }: Props) {
                   {formatSalary(jobData.salary_min, jobData.salary_max)} <span className="text-sm text-muted-foreground">{jobData.currency}/year</span>
                 </div>
                 <div className="mt-4">
-                  <Button className="w-full">
-                    Apply with Mostly Events
-                  </Button>
+                  <a
+                    href={`mostlyevents://mostlyevents.app/?id=${uuid}&type=JOB_ID&page=JOB_DETAILS`}
+                    className="w-full"
+                  >
+                    <Button className="w-full">
+                      Apply with Mostly Events
+                    </Button>
+                  </a>
                 </div>
               </div>
             </div>
