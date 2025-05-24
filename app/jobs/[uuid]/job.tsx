@@ -1,6 +1,6 @@
 'use client';
 
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -44,7 +44,7 @@ export default function Profile({ uuid }: Props) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-    const formatSalary = (min: string, max: string) => {
+  const formatSalary = (min: string, max: string) => {
     return `$${parseInt(min).toLocaleString()} - $${parseInt(max).toLocaleString()}`;
   };
 
@@ -102,26 +102,29 @@ export default function Profile({ uuid }: Props) {
       <div className="max-w-4xl mx-auto px-4">
         <Card>
           <CardHeader className="space-y-4">
-            <div className="flex justify-between items-start">
-              <div>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+              <div className="flex-1">
                 <h1 className="text-3xl font-bold">{jobData.title}</h1>
-                <div className="flex items-center gap-2 mt-2 text-muted-foreground">
+                <div className="flex items-center gap-2 mt-2 text-muted-foreground flex-wrap">
                   <Building2 className="w-4 h-4" />
                   <span>{jobData.company.name}</span>
                   <MapPin className="w-4 h-4 ml-2" />
                   <span>{jobData.location}</span>
                 </div>
               </div>
-              <div className="text-right">
+              <div className="text-left sm:text-right w-full sm:w-auto">
                 <div className="text-lg font-semibold">
-                  {formatSalary(jobData.salary_min, jobData.salary_max)} <span className="text-sm text-muted-foreground">{jobData.currency}/year</span>
+                  {formatSalary(jobData.salary_min, jobData.salary_max)}{" "}
+                  <span className="text-sm text-muted-foreground">
+                    {jobData.currency}/year
+                  </span>
                 </div>
                 <div className="mt-4">
                   <a
                     href={`mostlyevents://mostlyevents.app/?id=${uuid}&type=JOB_ID&page=JOB_DETAILS`}
-                    className="w-full"
+                    className="block sm:inline-block w-full sm:w-auto"
                   >
-                    <Button className="w-full">
+                    <Button className="w-full sm:w-auto">
                       Apply with Mostly Events
                     </Button>
                   </a>
@@ -131,11 +134,12 @@ export default function Profile({ uuid }: Props) {
             <div className="flex gap-2 flex-wrap">
               {jobData.tags.map((tag) => (
                 <Badge key={tag} variant="secondary">
-                  {tag.replace(/_/g, ' ')}
+                  {tag.replace(/_/g, " ")}
                 </Badge>
               ))}
             </div>
           </CardHeader>
+
           <CardContent>
             <Tabs defaultValue="job" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
