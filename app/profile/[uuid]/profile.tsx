@@ -17,6 +17,8 @@ import {
   UserIcon
 } from 'lucide-react'
 
+import Image from 'next/image'
+
 interface Props {
   uuid: string
 }
@@ -146,6 +148,14 @@ export default function Profile({ uuid }: Props) {
             <div className="flex-grow space-y-2">
               <h1 className="text-2xl font-bold">
                 {user?.first_name} {user?.last_name}
+                      <div className="flex gap-2 flex-wrap relative w-[170px] h-[20px] ">
+                        <Image
+                          src="/images/mostly-events.png"
+                          alt="Mostly Events"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
               </h1>
               <div className="flex items-center gap-2 text-muted-foreground">
                 <Briefcase className="w-4 h-4" />

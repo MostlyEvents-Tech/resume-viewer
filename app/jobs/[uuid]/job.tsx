@@ -9,6 +9,7 @@ import { Building2, Globe, MapPin } from "lucide-react";
 import Image from "next/image";
 import ReactMarkdown from 'react-markdown';
 
+
 interface Props {
   uuid: string
 }
@@ -138,6 +139,15 @@ export default function Profile({ uuid }: Props) {
                 </Badge>
               ))}
             </div>
+            <div className="flex gap-2 flex-wrap relative w-[170px] h-[20px] ">
+              <Image
+                src="/images/mostly-events.png"
+                alt="Mostly Events"
+                fill
+                className="object-cover"
+              />
+            </div>
+
           </CardHeader>
 
           <CardContent>
