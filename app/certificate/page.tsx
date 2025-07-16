@@ -34,11 +34,11 @@ export default function CertificatePage() {
 
 	const canvasRef = useRef<HTMLCanvasElement>(null);
 
-	// const uuid = searchParams.get('uuid');
-	// const user = searchParams.get('user');
+	const uuid = searchParams.get('uuid');
+	const user = searchParams.get('user');
 
-	const [uuid, setUuid] = useState('122e9e9b-05c4-47e3-9829-8571f3ff3695');
-	const [user, setUser] = useState('7b55279a-8c58-4204-85d2-529c379ad678');
+	// const [uuid, setUuid] = useState('122e9e9b-05c4-47e3-9829-8571f3ff3695');
+	// const [user, setUser] = useState('7b55279a-8c58-4204-85d2-529c379ad678');
 
 	useEffect(() => {
 		const fetchCertificate = async () => {
@@ -52,54 +52,54 @@ export default function CertificatePage() {
 			}
 
 			try {
-				// const baseUrl =
-				// 	'https://api-backend.mostlyevent.com/api/v1';
-				// const response = await fetch(
-				// 	`${baseUrl}/lms/certificate/?uuid=${uuid}&user=${user}`,
-				// 	{
-				// 		headers: {
-				// 			'Content-Type': 'application/json',
-				// 			'ngrok-skip-browser-warning': 'true'
-				// 		},
-				// 	}
-				// );
+				const baseUrl =
+					'https://api-backend.mostlyevent.com/api/v1';
+				const response = await fetch(
+					`${baseUrl}/lms/certificate/?uuid=${uuid}&user=${user}`,
+					{
+						headers: {
+							'Content-Type': 'application/json',
+							'ngrok-skip-browser-warning': 'true'
+						},
+					}
+				);
 
-				// if (!response.ok) {
-				// 	const errorData: ApiResponse = await response.json();
+				if (!response.ok) {
+					const errorData: ApiResponse = await response.json();
 
-				// 	if (response.status === 400) {
-				// 		setError(
-				// 			errorData.errors || 'Bad request - missing required parameters'
-				// 		);
-				// 		setErrorType('warning');
-				// 	} else if (response.status === 404) {
-				// 		setError(errorData.errors || 'Certificate not found');
-				// 		setErrorType('error');
-				// 	} else if (response.status === 403) {
-				// 		setError(
-				// 			errorData.errors ||
-				// 				'Certificate not available - course must be completed first'
-				// 		);
-				// 		setErrorType('warning');
-				// 	} else {
-				// 		setError('An unexpected error occurred');
-				// 		setErrorType('error');
-				// 	}
-				// 	return;
-				// }
+					if (response.status === 400) {
+						setError(
+							errorData.errors || 'Bad request - missing required parameters'
+						);
+						setErrorType('warning');
+					} else if (response.status === 404) {
+						setError(errorData.errors || 'Certificate not found');
+						setErrorType('error');
+					} else if (response.status === 403) {
+						setError(
+							errorData.errors ||
+								'Certificate not available - course must be completed first'
+						);
+						setErrorType('warning');
+					} else {
+						setError('An unexpected error occurred');
+						setErrorType('error');
+					}
+					return;
+				}
 
-				// const data: ApiResponse = await response.json();
+				const data: ApiResponse = await response.json();
 
-				const data: ApiResponse = {
-					success: true,
-					message: 'testing',
-					data: {
-						course_title: 'Long course title here.',
-						course_instructor: 'Han zemmer',
-						user_name: 'Abhijeet D.',
-						completed_at: '2024-12-15',
-					},
-				};
+				// const data: ApiResponse = {
+				// 	success: true,
+				// 	message: 'testing',
+				// 	data: {
+				// 		course_title: 'Long course title here.',
+				// 		course_instructor: 'Han zemmer',
+				// 		user_name: 'Abhijeet D.',
+				// 		completed_at: '2024-12-15',
+				// 	},
+				// };
 
 				if (data.success && data.data) {
 					setCertificateData(data.data);
