@@ -4,8 +4,8 @@ module.exports = {
       name: 'resume-viewer',
       script: 'npm',
       args: 'start',
-      instances: 2,
-      exec_mode: 'cluster',
+      instances: 1,  // Changed from 2 to 1 to avoid port conflicts
+      exec_mode: 'fork',  // Changed from cluster to fork for single instance
       watch: false,
       autorestart: true,
       max_memory_restart: '1G',
