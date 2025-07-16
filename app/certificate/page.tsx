@@ -61,7 +61,6 @@ export default function CertificatePage() {
 					{
 						headers: {
 							'Content-Type': 'application/json',
-							'ngrok-skip-browser-warning': 'true'
 						},
 					}
 				);
